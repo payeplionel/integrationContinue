@@ -6,3 +6,20 @@ jdk:
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+# Voici la partie magique
+deploy:
+  # Utiliser le processus de déploiement des pages Github
+  provider: pages
+  skip-cleanup: true
+  # Répertoire où se trouvent les fichiers générés
+  local_dir: public
+  # Github security/auth token
+  github-token: $GITHUB_TOKEN
+  # Conserve les anciens fichiers/constructions des déploiements précédents
+  keep-history: true
+  # La branche Git sur laquelle on souhaite déployer (master, gh-pages, foo...)
+  target_branch: gh-pages
+  on:
+    # Quelle branche déclenchera le déploiement
+    branch: main
